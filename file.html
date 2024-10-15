@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Crowd Limiting with F5 Distributed Cloud</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            background-color: #f4f4f4;
+            padding: 50px;
+        }
+        .slot-container {
+            margin-bottom: 20px;
+        }
+        .slot-label {
+            font-weight: bold;
+            margin-bottom: 10px;
+            display: block;
+        }
+        .blanks-container {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin-bottom: 10px;
+        }
+        .blank {
+            width: 30px;
+            height: 30px;
+            text-align: center;
+            font-size: 1.2em;
+            border: 2px solid #333;
+        }
+        #message {
+            font-size: 1.5em;
+            color: green;
+            margin-top: 20px;
+            display: none;
+        }
+        input {
+            padding: 5px;
+            margin-top: 10px;
+        }
+        button {
+            margin-top: 15px;
+            padding: 10px 20px;
+            font-size: 1em;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Crowd Limiting with F5 Distributed Cloud</h1>
+
+    <!-- Slot 1 -->
+    <div class="slot-container">
+        <span class="slot-label">Slot 1</span>
+        <div class="blanks-container">
+            <span class="blank" id="slot1-1">_</span>
+            <span class="blank" id="slot1-2">_</span>
+            <span class="blank" id="slot1-3">_</span>
+            <span class="blank" id="slot1-4">_</span>
+            <span class="blank" id="slot1-5">_</span>
+        </div>
+    </div>
+
+    <!-- Slot 2 -->
+    <div class="slot-container">
+        <span class="slot-label">Slot 2</span>
+        <div class="blanks-container">
+            <span class="blank" id="slot2-1">_</span>
+            <span class="blank" id="slot2-2">_</span>
+            <span class="blank" id="slot2-3">_</span>
+            <span class="blank" id="slot2-4">_</span>
+            <span class="blank" id="slot2-5">_</span>
+        </div>
+    </div>
+
+    <!-- Slot 3 -->
+    <div class="slot-container">
+        <span class="slot-label">Slot 3</span>
+        <div class="blanks-container">
+            <span class="blank" id="slot3-1">_</span>
+            <span class="blank" id="slot3-2">_</span>
+            <span class="blank" id="slot3-3">_</span>
+            <span class="blank" id="slot3-4">_</span>
+            <span class="blank" id="slot3-5">_</span>
+        </div>
+    </div>
+
+    <!-- Slot 4 -->
+    <div class="slot-container">
+        <span class="slot-label">Slot 4</span>
+        <div class="blanks-container">
+            <span class="blank" id="slot4-1">_</span>
+            <span class="blank" id="slot4-2">_</span>
+            <span class="blank" id="slot4-3">_</span>
+            <span class="blank" id="slot4-4">_</span>
+            <span class="blank" id="slot4-5">_</span>
+        </div>
+    </div>
+
+    <input type="text" id="answerInput" placeholder="Enter your answer">
+    <button onclick="checkAnswer()">Submit</button>
+
+    <div id="message">Congratulations! You have unlocked the hidden message: 839201</div>
+
+    <script>
+        // Define the correct answers for each slot
+        const correctAnswers = [
+            "A1", "A2", "A3", "A4", "A5",  // Slot 1 answers
+            "B1", "B2", "B3", "B4", "B5",  // Slot 2 answers
+            "C1", "C2", "C3", "C4", "C5",  // Slot 3 answers
+            "D1", "D2", "D3", "D4", "D5"   // Slot 4 answers
+        ];
+        
+        const blanks = [
+            document.getElementById("slot1-1"), document.getElementById("slot1-2"), document.getElementById("slot1-3"),
+            document.getElementById("slot1-4"), document.getElementById("slot1-5"),
+            document.getElementById("slot2-1"), document.getElementById("slot2-2"), document.getElementById("slot2-3"),
+            document.getElementById("slot2-4"), document.getElementById("slot2-5"),
+            document.getElementById("slot3-1"), document.getElementById("slot3-2"), document.getElementById("slot3-3"),
+            document.getElementById("slot3-4"), document.getElementById("slot3-5"),
+            document.getElementById("slot4-1"), document.getElementById("slot4-2"), document.getElementById("slot4-3"),
+            document.getElementById("slot4-4"), document.getElementById("slot4-5")
+        ];
+        
+        let filledCount = 0;
+
+        function checkAnswer() {
+            const userAnswer = document.getElementById("answerInput").value.toUpperCase();
+
+            correctAnswers.forEach((answer, index) => {
+                if (userAnswer === answer && blanks[index].textContent === "_") {
+                    blanks[index].textContent = answer;
+                    filledCount++;
+                }
+            });
+
+            // Clear input field
+            document.getElementById("answerInput").value = "";
+
+            // Check if all slots are filled
+            if (filledCount === correctAnswers.length) {
+                document.getElementById("message").style.display = "block";
+            }
+        }
+    </script>
+
+</body>
+</html>
